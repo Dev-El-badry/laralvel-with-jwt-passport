@@ -13,6 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/user/login', 'ApiLoginController@login')->name('api.user.login');
+
+Route::post('/user/register', 'ApiRegisterController@register')->name('api.user.register');
+
+Route::middleware('jwt.auth')->group(function() {
+
+	Route::get('/users', function(Request $request) {
+		return Auth::user();
+	});
+
+});
+
+Route::middleware('auth:api')->group(function () {
+    //Route::post('/post/{post}/comment', 'CommentController@store');
 });
