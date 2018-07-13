@@ -23,6 +23,8 @@ Route::middleware('jwt.auth')->group(function() {
 		return Auth::user();
 	});
 
+	Route::resource('/books', 'API\BookController');
+
 });
 
 Route::middleware('auth:api')->group(function () {
